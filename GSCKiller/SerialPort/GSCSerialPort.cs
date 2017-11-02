@@ -8,18 +8,27 @@ using System.Windows.Forms;
 
 namespace Johnbee
 {
-    class GSCSerialPort
+    public class GSCSerialPort: IPortWriteReceive
     {
         SerialPort MySerialPort = new SerialPort();
         bool CRLS_Flag = false;//回车换行标志
+
+        //public delegate void ComDataChangeDelegate(string s);
+        //public event ComDataChangeDelegate ComDataReceivedEvent;/*串口接收完成事件*/
+        public event PortReceivedString PortReceiveEvent;
 
         public GSCSerialPort()
         {
             MySerialPort.DataReceived += MySerialPort_DataReceived;
         }
 
-        public GSCSerialPort(SerialParameter myParameter)
+        /// <summary>
+        /// initiallize the port with @myParameter
+        /// </summary>
+        /// <param name="myParameter"></param>
+        public void GSCSerialPortInit(SerialParameter myParameter)
         {
+   
             CRLS_Flag = myParameter.CrlsEnable;
 
             MySerialPort.PortName = myParameter.PortName;
@@ -31,24 +40,48 @@ namespace Johnbee
             MySerialPort.ReadBufferSize = 500000;
             MySerialPort.ReadTimeout = 50;
             MySerialPort.WriteBufferSize = 50000;
-            MySerialPort.DataReceived += MySerialPort_DataReceived;
+        }
+        ~ GSCSerialPort()
+        {
+            MySerialPort.DataReceived -= MySerialPort_DataReceived;
         }
         private void MySerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            //throw new NotImplementedException();
+        {        
             SerialPort sp = (SerialPort)sender;
             string indata = sp.ReadExisting();
-            int t = 1;
+            PortReceiveEvent(indata);
         }
 
 
-        public void GSC_Write(string cmd)
-        {
-            //char[] s = cmd.ToCharArray();
-            byte[] s = { 0x71, 0x0d, 0x0a };
-            cmd = "H:1-\r\n";
-            MySerialPort.Write(cmd);
-        }
+        //public void GSC_Write(string cmd)
+        //{
+        //    if (!MySerialPort.IsOpen)
+        //    {
+        //        MessageBox.Show("Serial Part is closed!");
+        //        return;
+        //    }
+        //    string s = cmd;
+        //    if (CRLS_Flag) {s = cmd + "\r\n";}
+        //    //cmd = "H:1-\r\n";
+        //    MySerialPort.Write(s);
+        //}
+        //public void GSC_Write(byte[] cmd)
+        //{
+        //    if (!MySerialPort.IsOpen)
+        //    {
+        //        MessageBox.Show("Serial Part is closed!");
+        //        return;
+        //    }
+        //    var len = cmd.Length;
+        //    byte[] s = cmd;
+        //    if (CRLS_Flag)
+        //    {
+        //        s[len + 1] = (byte)'\r';
+        //        s[len + 2] = (byte)'\n';
+        //        MySerialPort.Write(s,0,len+2);
+        //    }
+        //}
+
         public int SerialPort_Open()
         {
             if (MySerialPort.IsOpen){return 1;}
@@ -72,6 +105,35 @@ namespace Johnbee
                 MessageBox.Show("Closed Failed!!!", "ERROR");
             }
             return 0;
+        }
+
+        public void WriteString(string cmd)
+        {
+            if (!MySerialPort.IsOpen)
+            {
+                MessageBox.Show("Serial Part is closed!");
+                return;
+            }
+            string s = cmd;
+            if (CRLS_Flag) { s = cmd + "\r\n"; }
+            //cmd = "H:1-\r\n";
+            MySerialPort.Write(s);
+        }
+        public void WriteByteArray(byte[] cmd)
+        {
+            if (!MySerialPort.IsOpen)
+            {
+                MessageBox.Show("Serial Part is closed!");
+                return;
+            }
+            var len = cmd.Length;
+            byte[] s = cmd;
+            if (CRLS_Flag)
+            {
+                s[len + 1] = (byte)'\r';
+                s[len + 2] = (byte)'\n';
+                MySerialPort.Write(s, 0, len + 2);
+            }
         }
     }
 }

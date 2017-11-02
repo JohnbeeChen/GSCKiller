@@ -8,17 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
-
-using GSCkiller.Forms;
 using Johnbee;
-
+using GSCkiller.Forms;
 
 namespace GSCKiller
 {
     public partial class Form1 : Form
     {
         SerialParameter MyParmeter = new SerialParameter();
-        GSCSerialPort MyGSCPort;
+        GSCSerialPort MyGSCPort = new GSCSerialPort();
+        
 
         public Form1()
         {
@@ -40,16 +39,20 @@ namespace GSCKiller
             if(btn_open.Text == "Open")
             {
                 MyParmeter.PortName = Comb_Port.Text;
+                if (MyParmeter.PortName == "")
+                {               
+                    MessageBox.Show(this,"Port Name is NULL!","ERROR");
+                    return;
+                }
                 MyParmeter.BaudRate = Convert.ToInt32(Comb_Bps.Text);
 
-                if (MyGSCPort == null)
-                {
-                    MyGSCPort = new GSCSerialPort(MyParmeter);
-                }
+                MyGSCPort.GSCSerialPortInit(MyParmeter);              
+
                 if(MyGSCPort.SerialPort_Open()== 1)
                 {
                     btn_open.Text = "Colse";
                     serial_open_disable_UI();
+                    MyGSCPort.PortReceiveEvent += MyGSCPort_ComDataReceivedEvent;
                 }
             }
             else if(btn_open.Text == "Colse")
@@ -58,24 +61,37 @@ namespace GSCKiller
                 {
                     btn_open.Text = "Open";
                     serial_close_enable_UI();
+                    MyGSCPort.PortReceiveEvent -= MyGSCPort_ComDataReceivedEvent;
                 }
             }
         }
+
+        private void MyGSCPort_ComDataReceivedEvent(string s)
+        {
+            string received_str = s;
+        }
+
+        /// <summary>
+        /// disable some UI when serial port have opened
+        /// </summary>
         private void serial_open_disable_UI()
         {
             Comb_Bps.Enabled = false;
             Comb_Port.Enabled = false;
             btn_Refresh.Enabled = false;
-            serial_setting.Enabled = false;
+            MoreSetting.Enabled = false;
 
 
         }
+        /// <summary>
+        /// enable some UI when serial port have closed
+        /// </summary>
         private void serial_close_enable_UI()
         {
             Comb_Bps.Enabled = true;
             Comb_Port.Enabled = true;
             btn_Refresh.Enabled = true;
-            serial_setting.Enabled = true;
+            MoreSetting.Enabled = true;
         }
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
@@ -115,10 +131,22 @@ namespace GSCKiller
             detail_form.ShowDialog();
         }
 
+        /// <summary>
+        /// just for debugging
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            string s = "Q\r\n";
-            MyGSCPort.GSC_Write(s);
+            string s = "Q";
+            MyGSCPort.WriteString(s);
+        }
+
+        private void GSCControllerMenu_Click(object sender, EventArgs e)
+        {
+            Forms.GSC_Controller gsc_contorller = new Forms.GSC_Controller(MyGSCPort);
+            gsc_contorller.MdiParent = this;
+            gsc_contorller.Show();
         }
     }
 }

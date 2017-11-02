@@ -54,6 +54,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\GSC_Controller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GSC_Controller.Designer.cs">
+      <DependentUpon>GSC_Controller.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PortDetailSeting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,10 +69,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerialPort\GSCSerialPort.cs" />
+    <Compile Include="SerialPort\IPortWriteReceive.cs" />
     <Compile Include="SerialPort\JohnbeeSerialPort.cs" />
     <Compile Include="SerialPort\SerialParameter.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GSC_Controller.resx">
+      <DependentUpon>GSC_Controller.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PortDetailSeting.resx">
       <DependentUpon>PortDetailSeting.cs</DependentUpon>

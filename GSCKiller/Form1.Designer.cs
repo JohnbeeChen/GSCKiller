@@ -43,9 +43,15 @@
             this.btn_open = new System.Windows.Forms.ToolStripButton();
             this.btn_Refresh = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.serial_setting = new System.Windows.Forms.ToolStripButton();
+            this.MoreSetting = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.windowWToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GSCControllerMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.notingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BottomToolStripPanel
@@ -151,22 +157,23 @@
             this.toolStripSeparator2,
             this.btn_open,
             this.btn_Refresh,
-            this.serial_setting,
+            this.MoreSetting,
             this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1429, 28);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // serial_setting
+            // MoreSetting
             // 
-            this.serial_setting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.serial_setting.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.serial_setting.Name = "serial_setting";
-            this.serial_setting.Size = new System.Drawing.Size(51, 25);
-            this.serial_setting.Text = "detail";
-            this.serial_setting.Click += new System.EventHandler(this.serial_setting_Click);
+            this.MoreSetting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.MoreSetting.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.MoreSetting.Name = "MoreSetting";
+            this.MoreSetting.Size = new System.Drawing.Size(95, 25);
+            this.MoreSetting.Text = "MoreSetting";
+            this.MoreSetting.ToolTipText = "More Setting about the Serial Port";
+            this.MoreSetting.Click += new System.EventHandler(this.serial_setting_Click);
             // 
             // toolStripButton1
             // 
@@ -178,13 +185,56 @@
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.windowWToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1429, 28);
+            this.menuStrip1.TabIndex = 9;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.notingToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
+            this.fileToolStripMenuItem.Text = "File(&F)";
+            // 
+            // windowWToolStripMenuItem
+            // 
+            this.windowWToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.GSCControllerMenu});
+            this.windowWToolStripMenuItem.Name = "windowWToolStripMenuItem";
+            this.windowWToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
+            this.windowWToolStripMenuItem.Text = "Window(&W)";
+            // 
+            // GSCControllerMenu
+            // 
+            this.GSCControllerMenu.Name = "GSCControllerMenu";
+            this.GSCControllerMenu.Size = new System.Drawing.Size(183, 26);
+            this.GSCControllerMenu.Text = "GSC_Controller";
+            this.GSCControllerMenu.Click += new System.EventHandler(this.GSCControllerMenu_Click);
+            // 
+            // notingToolStripMenuItem
+            // 
+            this.notingToolStripMenuItem.Name = "notingToolStripMenuItem";
+            this.notingToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.notingToolStripMenuItem.Text = "Noting";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1429, 979);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -192,6 +242,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,8 +264,13 @@
         private System.Windows.Forms.ToolStripButton btn_open;
         private System.Windows.Forms.ToolStripButton btn_Refresh;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton serial_setting;
+        private System.Windows.Forms.ToolStripButton MoreSetting;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem windowWToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GSCControllerMenu;
+        private System.Windows.Forms.ToolStripMenuItem notingToolStripMenuItem;
     }
 }
 

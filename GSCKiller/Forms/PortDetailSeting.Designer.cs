@@ -43,7 +43,7 @@
             // cBox_Crlf
             // 
             this.cBox_Crlf.AutoSize = true;
-            this.cBox_Crlf.Location = new System.Drawing.Point(303, 24);
+            this.cBox_Crlf.Location = new System.Drawing.Point(274, 45);
             this.cBox_Crlf.Name = "cBox_Crlf";
             this.cBox_Crlf.Size = new System.Drawing.Size(69, 19);
             this.cBox_Crlf.TabIndex = 0;
@@ -53,7 +53,7 @@
             // cBox_RTS
             // 
             this.cBox_RTS.AutoSize = true;
-            this.cBox_RTS.Location = new System.Drawing.Point(303, 92);
+            this.cBox_RTS.Location = new System.Drawing.Point(274, 92);
             this.cBox_RTS.Name = "cBox_RTS";
             this.cBox_RTS.Size = new System.Drawing.Size(53, 19);
             this.cBox_RTS.TabIndex = 1;
@@ -131,9 +131,9 @@
             // 
             // btn_setting
             // 
-            this.btn_setting.Location = new System.Drawing.Point(71, 204);
+            this.btn_setting.Location = new System.Drawing.Point(84, 204);
             this.btn_setting.Name = "btn_setting";
-            this.btn_setting.Size = new System.Drawing.Size(75, 23);
+            this.btn_setting.Size = new System.Drawing.Size(75, 35);
             this.btn_setting.TabIndex = 9;
             this.btn_setting.Text = "Setting";
             this.btn_setting.UseVisualStyleBackColor = true;
@@ -141,9 +141,9 @@
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(258, 204);
+            this.btn_cancel.Location = new System.Drawing.Point(243, 204);
             this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(75, 23);
+            this.btn_cancel.Size = new System.Drawing.Size(75, 35);
             this.btn_cancel.TabIndex = 10;
             this.btn_cancel.Text = "Cancel";
             this.btn_cancel.UseVisualStyleBackColor = true;
