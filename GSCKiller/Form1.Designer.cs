@@ -44,6 +44,7 @@
             this.btn_Refresh = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.serial_setting = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,7 +151,8 @@
             this.toolStripSeparator2,
             this.btn_open,
             this.btn_Refresh,
-            this.serial_setting});
+            this.serial_setting,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1429, 28);
@@ -164,6 +166,17 @@
             this.serial_setting.Name = "serial_setting";
             this.serial_setting.Size = new System.Drawing.Size(51, 25);
             this.serial_setting.Text = "detail";
+            this.serial_setting.Click += new System.EventHandler(this.serial_setting_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(24, 25);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // Form1
             // 
@@ -200,6 +213,7 @@
         private System.Windows.Forms.ToolStripButton btn_Refresh;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton serial_setting;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 
