@@ -33,6 +33,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,6 +66,25 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Thorlabs.MotionControl.Controls">
+      <HintPath>..\ThrolabsDll\Thorlabs.MotionControl.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Thorlabs.MotionControl.DeviceManagerCLI, Version=1.14.1.17240, Culture=neutral, PublicKeyToken=c7ec6d6d6e2435e7, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThrolabsDll\Thorlabs.MotionControl.DeviceManagerCLI.dll</HintPath>
+    </Reference>
+    <Reference Include="Thorlabs.MotionControl.DeviceManagerUI, Version=1.14.1.0, Culture=neutral, PublicKeyToken=c7ec6d6d6e2435e7, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThrolabsDll\Thorlabs.MotionControl.DeviceManagerUI.dll</HintPath>
+    </Reference>
+    <Reference Include="ThorLabs.MotionControl.TCube.InertialMotorCLI, Version=1.14.1.17828, Culture=neutral, PublicKeyToken=c7ec6d6d6e2435e7, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThrolabsDll\ThorLabs.MotionControl.TCube.InertialMotorCLI.dll</HintPath>
+    </Reference>
+    <Reference Include="Thorlabs.MotionControl.TCube.InertialMotorUI, Version=1.14.1.0, Culture=neutral, PublicKeyToken=c7ec6d6d6e2435e7, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThrolabsDll\Thorlabs.MotionControl.TCube.InertialMotorUI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
@@ -59,6 +98,12 @@
     </Compile>
     <Compile Include="Forms\GSC_Controller.Designer.cs">
       <DependentUpon>GSC_Controller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Kenesis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Kenesis.Designer.cs">
+      <DependentUpon>Kenesis.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PortDetailSeting.cs">
       <SubType>Form</SubType>
@@ -77,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GSC_Controller.resx">
       <DependentUpon>GSC_Controller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Kenesis.resx">
+      <DependentUpon>Kenesis.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PortDetailSeting.resx">
       <DependentUpon>PortDetailSeting.cs</DependentUpon>

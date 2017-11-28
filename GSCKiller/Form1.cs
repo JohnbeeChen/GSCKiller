@@ -33,6 +33,7 @@ namespace GSCKiller
             Comb_Bps.Items.Add("115200");
             Comb_Bps.Text = "9600";
             btn_Refresh_Click(sender, e);
+            MyParmeter.PortName = Comb_Port.Text;
         }
         private void btn_open_Click(object sender, EventArgs e)
         {
@@ -50,12 +51,12 @@ namespace GSCKiller
 
                 if(MyGSCPort.SerialPort_Open()== 1)
                 {
-                    btn_open.Text = "Colse";
+                    btn_open.Text = "Close";
                     serial_open_disable_UI();
                     MyGSCPort.PortReceiveEvent += MyGSCPort_ComDataReceivedEvent;
                 }
             }
-            else if(btn_open.Text == "Colse")
+            else if(btn_open.Text == "Close")
             {
                 if(MyGSCPort.SerialPort_Close() == 1)
                 {
@@ -138,8 +139,11 @@ namespace GSCKiller
         /// <param name="e"></param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            string s = "Q";
-            MyGSCPort.WriteString(s);
+            //string s = "Q";
+            //MyGSCPort.WriteString(s);
+            Forms.Kenesis tem = new Forms.Kenesis(MyParmeter);
+            tem.MdiParent = this;
+            tem.Show();
         }
 
         private void GSCControllerMenu_Click(object sender, EventArgs e)
