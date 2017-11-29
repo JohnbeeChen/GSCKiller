@@ -68,7 +68,38 @@ namespace GSCKiller
                 }
             }
         }
+        private void btn_open2_Click(object sender, EventArgs e)
+        {
+            ToolStripButton btn = (ToolStripButton)sender;
+            if (btn.Text == "Open")
+            {
+                MyParmeter.PortName = Comb_Port2.Text;
+                if (MyParmeter.PortName == "")
+                {
+                    MessageBox.Show(this, "Port Name is NULL!", "ERROR");
+                    return;
+                }
+                MyParmeter.BaudRate = Convert.ToInt32(Comb_Bps.Text);
 
+                MyGSCPort2.GSCSerialPortInit(MyParmeter);
+
+                if (MyGSCPort2.SerialPort_Open() == 1)
+                {
+                    btn.Text = "Close";
+                    serial_open_disable_UI();
+                    MyGSCPort2.PortReceiveEvent += MyGSCPort_ComDataReceivedEvent;
+                }
+            }
+            else if (btn.Text == "Close")
+            {
+                if (MyGSCPort2.SerialPort_Close() == 1)
+                {
+                    btn.Text = "Open";
+                    serial_close_enable_UI();
+                    MyGSCPort2.PortReceiveEvent -= MyGSCPort_ComDataReceivedEvent;
+                }
+            }
+        }
         private void MyGSCPort_ComDataReceivedEvent(string s)
         {
             string received_str = s;
@@ -143,6 +174,10 @@ namespace GSCKiller
             {
                 MyGSCPort1.SerialPort_Close();                
             }
+            if (MyGSCPort2 != null)
+            {
+                MyGSCPort2.SerialPort_Close();
+            }
         }
 
         private void serial_setting_Click(object sender, EventArgs e)
@@ -156,58 +191,20 @@ namespace GSCKiller
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            //string s = "Q";
-            //MyGSCPort1.WriteString(s);
-            Forms.Kenesis tem = new Forms.Kenesis(MyParmeter);
-            tem.MdiParent = this;
-            tem.Show();
-        }
+        //private void toolStripButton1_Click(object sender, EventArgs e)
+        //{
+        //    //string s = "Q";
+        //    //MyGSCPort1.WriteString(s);
+        //    Forms.Kenesis tem = new Forms.Kenesis(MyParmeter);
+        //    tem.MdiParent = this;
+        //    tem.Show();
+        //}
 
         private void GSCControllerMenu_Click(object sender, EventArgs e)
         {
             Forms.GSC_Controller gsc_contorller = new Forms.GSC_Controller(MyGSCPort1);
             gsc_contorller.MdiParent = this;
             gsc_contorller.Show();
-        }
-
-        /// <summary>
-        /// I feel some problems in here
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_open2_Click(object sender, EventArgs e)
-        {
-            ToolStripButton btn = (ToolStripButton)sender;
-            if (btn.Text == "Open")
-            {
-                MyParmeter.PortName = Comb_Port2.Text;
-                if (MyParmeter.PortName == "")
-                {
-                    MessageBox.Show(this, "Port Name is NULL!", "ERROR");
-                    return;
-                }
-                MyParmeter.BaudRate = Convert.ToInt32(Comb_Bps.Text);
-
-                MyGSCPort2.GSCSerialPortInit(MyParmeter);
-
-                if (MyGSCPort2.SerialPort_Open() == 1)
-                {
-                    btn.Text = "Close";
-                    serial_open_disable_UI();
-                    MyGSCPort2.PortReceiveEvent += MyGSCPort_ComDataReceivedEvent;
-                }
-            }
-            else if (btn.Text == "Close")
-            {
-                if (MyGSCPort2.SerialPort_Close() == 1)
-                {
-                    btn.Text = "Open";
-                    serial_close_enable_UI();
-                    MyGSCPort2.PortReceiveEvent -= MyGSCPort_ComDataReceivedEvent;
-                }
-            }
         }
     }
 }

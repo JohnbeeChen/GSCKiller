@@ -11,7 +11,7 @@ namespace Johnbee
     public class GSCSerialPort: IPortWriteReceive
     {
         SerialPort MySerialPort = new SerialPort();
-        bool CRLS_Flag = false;//回车换行标志
+        bool CRLS_Flag = false;//回车换行标志  
         public bool IsOpen { get { return _isopen; }}
         bool _isopen = false;
         //public delegate void ComDataChangeDelegate(string s);

@@ -111,6 +111,7 @@
     <Compile Include="Forms\PortDetailSeting.Designer.cs">
       <DependentUpon>PortDetailSeting.cs</DependentUpon>
     </Compile>
+    <Compile Include="GSC\GSC_Command.cs" />
     <Compile Include="PortForm.cs">
       <SubType>Form</SubType>
     </Compile>
