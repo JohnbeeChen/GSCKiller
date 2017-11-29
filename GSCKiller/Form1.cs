@@ -16,8 +16,8 @@ namespace GSCKiller
     public partial class Form1 : Form
     {
         SerialParameter MyParmeter = new SerialParameter();
-        GSCSerialPort MyGSCPort = new GSCSerialPort();
-        
+        GSCSerialPort MyGSCPort1 = new GSCSerialPort();
+        GSCSerialPort MyGSCPort2 = new GSCSerialPort();
 
         public Form1()
         {
@@ -32,14 +32,16 @@ namespace GSCKiller
             Comb_Bps.Items.Add("9600");
             Comb_Bps.Items.Add("115200");
             Comb_Bps.Text = "9600";
+
             btn_Refresh_Click(sender, e);
-            MyParmeter.PortName = Comb_Port.Text;
+            MyParmeter.PortName = Comb_Port1.Text;
         }
         private void btn_open_Click(object sender, EventArgs e)
         {
-            if(btn_open.Text == "Open")
+            ToolStripButton btn = (ToolStripButton)sender;
+            if(btn.Text == "Open")
             {
-                MyParmeter.PortName = Comb_Port.Text;
+                MyParmeter.PortName = Comb_Port1.Text;
                 if (MyParmeter.PortName == "")
                 {               
                     MessageBox.Show(this,"Port Name is NULL!","ERROR");
@@ -47,22 +49,22 @@ namespace GSCKiller
                 }
                 MyParmeter.BaudRate = Convert.ToInt32(Comb_Bps.Text);
 
-                MyGSCPort.GSCSerialPortInit(MyParmeter);              
+                MyGSCPort1.GSCSerialPortInit(MyParmeter);              
 
-                if(MyGSCPort.SerialPort_Open()== 1)
+                if(MyGSCPort1.SerialPort_Open()== 1)
                 {
-                    btn_open.Text = "Close";
+                    btn.Text = "Close";
                     serial_open_disable_UI();
-                    MyGSCPort.PortReceiveEvent += MyGSCPort_ComDataReceivedEvent;
+                    MyGSCPort1.PortReceiveEvent += MyGSCPort_ComDataReceivedEvent;
                 }
             }
-            else if(btn_open.Text == "Close")
+            else if(btn.Text == "Close")
             {
-                if(MyGSCPort.SerialPort_Close() == 1)
+                if(MyGSCPort1.SerialPort_Close() == 1)
                 {
-                    btn_open.Text = "Open";
+                    btn.Text = "Open";
                     serial_close_enable_UI();
-                    MyGSCPort.PortReceiveEvent -= MyGSCPort_ComDataReceivedEvent;
+                    MyGSCPort1.PortReceiveEvent -= MyGSCPort_ComDataReceivedEvent;
                 }
             }
         }
@@ -77,27 +79,44 @@ namespace GSCKiller
         /// </summary>
         private void serial_open_disable_UI()
         {
+            if(MyGSCPort1.IsOpen)
+            {
+                Comb_Port1.Enabled = false;
+            }
+            if (MyGSCPort2.IsOpen)
+            {
+                Comb_Port2.Enabled = false;
+            }
             Comb_Bps.Enabled = false;
-            Comb_Port.Enabled = false;
+
             btn_Refresh.Enabled = false;
             MoreSetting.Enabled = false;
-
-
         }
         /// <summary>
         /// enable some UI when serial port have closed
         /// </summary>
         private void serial_close_enable_UI()
         {
-            Comb_Bps.Enabled = true;
-            Comb_Port.Enabled = true;
-            btn_Refresh.Enabled = true;
-            MoreSetting.Enabled = true;
+            if (!MyGSCPort1.IsOpen)
+            {
+                Comb_Port1.Enabled = true;
+            }
+            if (!MyGSCPort2.IsOpen)
+            {
+                Comb_Port2.Enabled = true;
+            }
+            if (MyGSCPort1.IsOpen == false && MyGSCPort2.IsOpen == false)
+            {
+                Comb_Bps.Enabled = true;
+                btn_Refresh.Enabled = true;
+                MoreSetting.Enabled = true;
+            }
         }
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
             string[] coms = SerialPort.GetPortNames();
-            Set_ComboBoxIntem(Comb_Port, coms);
+            Set_ComboBoxIntem(Comb_Port1, coms);
+            Set_ComboBoxIntem(Comb_Port2, coms);
         }
         private void Set_ComboBoxIntem(ToolStripComboBox myBox,string[] myIntems)
         {
@@ -110,7 +129,7 @@ namespace GSCKiller
         }
         private void Comb_Port_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MyParmeter.PortName = Comb_Port.Text;
+            MyParmeter.PortName = Comb_Port1.Text;
 
         }
         private void Comb_Bps_SelectedIndexChanged(object sender, EventArgs e)
@@ -120,9 +139,9 @@ namespace GSCKiller
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(MyGSCPort != null)
+            if(MyGSCPort1 != null)
             {
-                MyGSCPort.SerialPort_Close();                
+                MyGSCPort1.SerialPort_Close();                
             }
         }
 
@@ -140,7 +159,7 @@ namespace GSCKiller
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             //string s = "Q";
-            //MyGSCPort.WriteString(s);
+            //MyGSCPort1.WriteString(s);
             Forms.Kenesis tem = new Forms.Kenesis(MyParmeter);
             tem.MdiParent = this;
             tem.Show();
@@ -148,9 +167,47 @@ namespace GSCKiller
 
         private void GSCControllerMenu_Click(object sender, EventArgs e)
         {
-            Forms.GSC_Controller gsc_contorller = new Forms.GSC_Controller(MyGSCPort);
+            Forms.GSC_Controller gsc_contorller = new Forms.GSC_Controller(MyGSCPort1);
             gsc_contorller.MdiParent = this;
             gsc_contorller.Show();
+        }
+
+        /// <summary>
+        /// I feel some problems in here
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_open2_Click(object sender, EventArgs e)
+        {
+            ToolStripButton btn = (ToolStripButton)sender;
+            if (btn.Text == "Open")
+            {
+                MyParmeter.PortName = Comb_Port2.Text;
+                if (MyParmeter.PortName == "")
+                {
+                    MessageBox.Show(this, "Port Name is NULL!", "ERROR");
+                    return;
+                }
+                MyParmeter.BaudRate = Convert.ToInt32(Comb_Bps.Text);
+
+                MyGSCPort2.GSCSerialPortInit(MyParmeter);
+
+                if (MyGSCPort2.SerialPort_Open() == 1)
+                {
+                    btn.Text = "Close";
+                    serial_open_disable_UI();
+                    MyGSCPort2.PortReceiveEvent += MyGSCPort_ComDataReceivedEvent;
+                }
+            }
+            else if (btn.Text == "Close")
+            {
+                if (MyGSCPort2.SerialPort_Close() == 1)
+                {
+                    btn.Text = "Open";
+                    serial_close_enable_UI();
+                    MyGSCPort2.PortReceiveEvent -= MyGSCPort_ComDataReceivedEvent;
+                }
+            }
         }
     }
 }

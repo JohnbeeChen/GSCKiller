@@ -29,7 +29,6 @@ namespace GSCkiller.Forms
 
             cBox_Crlf.Checked = MyParameter.CrlsEnable;
             cBox_RTS.Checked = MyParameter.RtsEnable;
-
         }
 
         private void btn_setting_Click(object sender, EventArgs e)

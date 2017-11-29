@@ -12,7 +12,8 @@ namespace Johnbee
     {
         SerialPort MySerialPort = new SerialPort();
         bool CRLS_Flag = false;//回车换行标志
-
+        public bool IsOpen { get { return _isopen; }}
+        bool _isopen = false;
         //public delegate void ComDataChangeDelegate(string s);
         //public event ComDataChangeDelegate ComDataReceivedEvent;/*串口接收完成事件*/
         public event PortReceivedString PortReceiveEvent;
@@ -84,21 +85,30 @@ namespace Johnbee
 
         public int SerialPort_Open()
         {
-            if (MySerialPort.IsOpen){return 1;}
+            if (MySerialPort.IsOpen)
+            {
+                _isopen = true;
+                return 1;
+            }
             try
             {
                 MySerialPort.Open();
-                if (MySerialPort.IsOpen) { return 1; }
+                if (MySerialPort.IsOpen)
+                {
+                    _isopen = true;
+                    return 1;
+                }
             }
             catch
             {
                 MessageBox.Show("Open fiale!");
             }
+            _isopen = false;
             return 0;
         }
         public int SerialPort_Close()
         {
-            try { MySerialPort.Close(); return 1; }
+            try { MySerialPort.Close(); _isopen = false; return 1; }
             catch
             {
                 System.Media.SystemSounds.Asterisk.Play();

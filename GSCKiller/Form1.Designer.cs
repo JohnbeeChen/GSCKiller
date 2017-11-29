@@ -38,18 +38,23 @@
             this.Comb_Bps = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lab_Com = new System.Windows.Forms.ToolStripLabel();
-            this.Comb_Port = new System.Windows.Forms.ToolStripComboBox();
+            this.Comb_Port1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btn_open = new System.Windows.Forms.ToolStripButton();
+            this.btn_openport1 = new System.Windows.Forms.ToolStripButton();
             this.btn_Refresh = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.Comb_Port2 = new System.Windows.Forms.ToolStripComboBox();
+            this.btn_openport2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.MoreSetting = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowWToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GSCControllerMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.notingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -111,29 +116,29 @@
             // lab_Com
             // 
             this.lab_Com.Name = "lab_Com";
-            this.lab_Com.Size = new System.Drawing.Size(38, 25);
-            this.lab_Com.Text = "Port:";
+            this.lab_Com.Size = new System.Drawing.Size(46, 25);
+            this.lab_Com.Text = "Port1:";
             // 
-            // Comb_Port
+            // Comb_Port1
             // 
-            this.Comb_Port.Name = "Comb_Port";
-            this.Comb_Port.Size = new System.Drawing.Size(160, 28);
-            this.Comb_Port.SelectedIndexChanged += new System.EventHandler(this.Comb_Port_SelectedIndexChanged);
+            this.Comb_Port1.Name = "Comb_Port1";
+            this.Comb_Port1.Size = new System.Drawing.Size(160, 28);
+            this.Comb_Port1.SelectedIndexChanged += new System.EventHandler(this.Comb_Port_SelectedIndexChanged);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 28);
             // 
-            // btn_open
+            // btn_openport1
             // 
-            this.btn_open.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btn_open.Image = ((System.Drawing.Image)(resources.GetObject("btn_open.Image")));
-            this.btn_open.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_open.Name = "btn_open";
-            this.btn_open.Size = new System.Drawing.Size(49, 25);
-            this.btn_open.Text = "Open";
-            this.btn_open.Click += new System.EventHandler(this.btn_open_Click);
+            this.btn_openport1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btn_openport1.Image = ((System.Drawing.Image)(resources.GetObject("btn_openport1.Image")));
+            this.btn_openport1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_openport1.Name = "btn_openport1";
+            this.btn_openport1.Size = new System.Drawing.Size(49, 25);
+            this.btn_openport1.Text = "Open";
+            this.btn_openport1.Click += new System.EventHandler(this.btn_open_Click);
             // 
             // btn_Refresh
             // 
@@ -153,17 +158,58 @@
             this.Comb_Bps,
             this.toolStripSeparator1,
             this.lab_Com,
-            this.Comb_Port,
+            this.Comb_Port1,
             this.toolStripSeparator2,
-            this.btn_open,
+            this.btn_openport1,
+            this.toolStripSeparator5,
+            this.toolStripLabel1,
+            this.Comb_Port2,
+            this.btn_openport2,
+            this.toolStripSeparator3,
             this.btn_Refresh,
-            this.MoreSetting,
-            this.toolStripButton1});
+            this.toolStripSeparator6,
+            this.MoreSetting});
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1429, 28);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 28);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(46, 25);
+            this.toolStripLabel1.Text = "Port2:";
+            // 
+            // Comb_Port2
+            // 
+            this.Comb_Port2.Name = "Comb_Port2";
+            this.Comb_Port2.Size = new System.Drawing.Size(121, 28);
+            // 
+            // btn_openport2
+            // 
+            this.btn_openport2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btn_openport2.Image = ((System.Drawing.Image)(resources.GetObject("btn_openport2.Image")));
+            this.btn_openport2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_openport2.Name = "btn_openport2";
+            this.btn_openport2.Size = new System.Drawing.Size(49, 25);
+            this.btn_openport2.Text = "Open";
+            this.btn_openport2.Click += new System.EventHandler(this.btn_open2_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 28);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 28);
             // 
             // MoreSetting
             // 
@@ -174,16 +220,6 @@
             this.MoreSetting.Text = "MoreSetting";
             this.MoreSetting.ToolTipText = "More Setting about the Serial Port";
             this.MoreSetting.Click += new System.EventHandler(this.serial_setting_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(24, 25);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // menuStrip1
             // 
@@ -205,6 +241,12 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
             this.fileToolStripMenuItem.Text = "File(&F)";
             // 
+            // notingToolStripMenuItem
+            // 
+            this.notingToolStripMenuItem.Name = "notingToolStripMenuItem";
+            this.notingToolStripMenuItem.Size = new System.Drawing.Size(130, 26);
+            this.notingToolStripMenuItem.Text = "Noting";
+            // 
             // windowWToolStripMenuItem
             // 
             this.windowWToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -219,12 +261,6 @@
             this.GSCControllerMenu.Size = new System.Drawing.Size(183, 26);
             this.GSCControllerMenu.Text = "GSC_Controller";
             this.GSCControllerMenu.Click += new System.EventHandler(this.GSCControllerMenu_Click);
-            // 
-            // notingToolStripMenuItem
-            // 
-            this.notingToolStripMenuItem.Name = "notingToolStripMenuItem";
-            this.notingToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.notingToolStripMenuItem.Text = "Noting";
             // 
             // Form1
             // 
@@ -259,18 +295,23 @@
         private System.Windows.Forms.ToolStripComboBox Comb_Bps;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel lab_Com;
-        private System.Windows.Forms.ToolStripComboBox Comb_Port;
+        private System.Windows.Forms.ToolStripComboBox Comb_Port1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton btn_open;
+        private System.Windows.Forms.ToolStripButton btn_openport1;
         private System.Windows.Forms.ToolStripButton btn_Refresh;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton MoreSetting;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowWToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GSCControllerMenu;
         private System.Windows.Forms.ToolStripMenuItem notingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripComboBox Comb_Port2;
+        private System.Windows.Forms.ToolStripButton btn_openport2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
 
