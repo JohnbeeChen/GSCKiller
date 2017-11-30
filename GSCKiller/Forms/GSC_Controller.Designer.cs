@@ -34,6 +34,9 @@
             this.btn_JogX = new System.Windows.Forms.Button();
             this.btn_JogY = new System.Windows.Forms.Button();
             this.btn_JogR = new System.Windows.Forms.Button();
+            this.btn_Stop = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_HomeX
@@ -96,11 +99,44 @@
             this.btn_JogR.UseVisualStyleBackColor = true;
             this.btn_JogR.Click += new System.EventHandler(this.btn_JogR_Click);
             // 
+            // btn_Stop
+            // 
+            this.btn_Stop.Location = new System.Drawing.Point(487, 318);
+            this.btn_Stop.Name = "btn_Stop";
+            this.btn_Stop.Size = new System.Drawing.Size(90, 75);
+            this.btn_Stop.TabIndex = 6;
+            this.btn_Stop.Text = "StopR";
+            this.btn_Stop.UseVisualStyleBackColor = true;
+            this.btn_Stop.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(161, 318);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(90, 75);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "StopX";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(322, 318);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(90, 75);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "StopY";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // GSC_Controller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 561);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_Stop);
             this.Controls.Add(this.btn_JogR);
             this.Controls.Add(this.btn_JogY);
             this.Controls.Add(this.btn_JogX);
@@ -124,5 +160,8 @@
         private System.Windows.Forms.Button btn_JogX;
         private System.Windows.Forms.Button btn_JogY;
         private System.Windows.Forms.Button btn_JogR;
+        private System.Windows.Forms.Button btn_Stop;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
