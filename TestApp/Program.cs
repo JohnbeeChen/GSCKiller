@@ -30,8 +30,11 @@ namespace TestApp
                 ReceivedEvent(this, myArgs);
             }
         }
+        public enum SpeedRange { LowSpeed = 1, HighSpeed };
         static void Main(string[] args)
         {
+            string s = ((int)SpeedRange.HighSpeed).ToString();
+
             IWriter writer1 = new MyWriter();
             writer1.ReceivedEvent += Writer1_ReceivedEvent;
             writer1.Writer("nmb,I want to write something!");

@@ -9,6 +9,7 @@ namespace GSCKiller.GSC
     public enum Axis { Axis1 = 1, Axis2, BothAxis };
     public enum MoveDirection { Foreward,Backward };
     public enum SpeedRange { LowSpeed = 1, HighSpeed };
+
     public static class GSC_Command
     {
         /// <summary>
@@ -42,7 +43,7 @@ namespace GSCKiller.GSC
         /// <returns> command string </returns>
         public static string MoveCommand(Axis myAxis, int travelNum)
         {
-            string axis_name = myAxis.ToString();
+            string axis_name = ((int)myAxis).ToString();
             string dir = "-";
             if (travelNum >0)
             {
@@ -92,6 +93,15 @@ namespace GSCKiller.GSC
             string cmd = SpecialCmd("L:",myAxis);
             return cmd;
         }
+        /// <summary>
+        /// The Go command is used after Move and Jog commands to start moving the stage
+        /// </summary>
+        /// <returns></returns>
+        public static string GoCommand()
+        {
+            return "G";
+        }
+
         public static string SetLogicalOrigin(Axis myAxis)
         {
             string cmd = SpecialCmd("R:", myAxis);
@@ -119,18 +129,56 @@ namespace GSCKiller.GSC
             return cmd + "0";
         }
 
+        /// <summary>
+        /// this command sets the minmim speed, maximum speed and acceleration/deceleration time.
+        /// </summary>
+        /// <param name="spdRange"> speed range, LowSpeed or HighSpeed</param>
+        /// <param name="minSpd1">minimum speed,1-200PPS(Low range), 50-20000PPS(High range)</param>
+        /// <param name="maxSpd1">maximum speed,1-200PPS(Low range), 50-20000PPS(High range)</param>
+        /// <param name="accTime1">acceleration/deceleration, 0-1000ms</param>
+        /// <returns>cmd string</returns>
+        /// <notice>maxSpd should >= minSpd.if minSpd==maxSpd,or accTime=0,stage move at a constant speed</notice>
         public static string SetSpeed(SpeedRange spdRange,int minSpd1,int maxSpd1,int accTime1,int minSpd2,int maxSpd2,int accTime2)
         {
             Func<int, int, int, string> t = (int x, int y, int z) =>
             {
                 return "S" + x.ToString() + "F" + y.ToString() + "R" + z.ToString();
             };
-            string cmd = spdRange.ToString() + t(minSpd1,maxSpd1,accTime1)+t(minSpd2,maxSpd2,accTime2);
+            string cmd = ((int)spdRange).ToString() + t(minSpd1,maxSpd1,accTime1)+t(minSpd2,maxSpd2,accTime2);
             return "D:"+ cmd;
         }
+
+        /// <summary>
+        /// inquire the coordinates for each axis and the current state of each stage.
+        /// </summary>
+        /// <returns> command string </returns>
+        public static string InquireAllInfo()
+        {
+            return "Q:";
+        }
+
+        /// <summary>
+        /// inquire the stage operating status
+        /// </summary>
+        /// <returns></returns>
+        public static string InquireStatusInfo()
+        {
+            return "!:";
+        }
+
+        /// <summary>
+        /// inquire teh internal ROM version from the controller
+        /// </summary>
+        /// <returns></returns>
+        public static string InquireInternalInfo()
+        {
+            return "?:V";
+        }
+
+
         private static string NoParameterCmd(string cmdChar, Axis myAxis, MoveDirection myDirection)
         {
-            string axis_name = myAxis.ToString();
+            string axis_name = ((int)myAxis).ToString();
             string dir = "-";
             if (myDirection == MoveDirection.Foreward)
             {
@@ -159,7 +207,7 @@ namespace GSCKiller.GSC
             string str;
             if (myAxis == Axis.Axis1 || myAxis == Axis.Axis2)
             {
-                str = myAxis.ToString();
+                str = ((int)myAxis).ToString();
             }
             else
             {
