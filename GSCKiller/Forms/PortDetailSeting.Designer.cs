@@ -1,4 +1,4 @@
-﻿namespace GSCkiller.Forms
+﻿namespace GSCKiller.Forms
 {
     partial class PortDetailSeting
     {

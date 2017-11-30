@@ -9,23 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using Johnbee;
-using GSCkiller.Forms;
+using GSCKiller.Forms;
 
 namespace GSCKiller
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         SerialParameter MyParmeter = new SerialParameter();
-        GSCSerialPort MyGSCPort1 = new GSCSerialPort();
-        GSCSerialPort MyGSCPort2 = new GSCSerialPort();
+        GSCSerialPort MyGSCPortPlane = new GSCSerialPort();
+        GSCSerialPort MyGSCPortRotation = new GSCSerialPort();
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             MyParmeter.RtsEnable = true;
             MyParmeter.CrlsEnable = true;
-            MyParmeter.StopBits = System.IO.Ports.StopBits.One;            
+            MyParmeter.StopBits = StopBits.One;
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             Control.CheckForIllegalCrossThreadCalls = false;
@@ -49,22 +50,22 @@ namespace GSCKiller
                 }
                 MyParmeter.BaudRate = Convert.ToInt32(Comb_Bps.Text);
 
-                MyGSCPort1.GSCSerialPortInit(MyParmeter);              
+                MyGSCPortPlane.GSCSerialPortInit(MyParmeter);              
 
-                if(MyGSCPort1.SerialPort_Open()== 1)
+                if(MyGSCPortPlane.SerialPort_Open()== 1)
                 {
                     btn.Text = "Close";
                     serial_open_disable_UI();
-                    MyGSCPort1.PortReceiveEvent += MyGSCPort_ComDataReceivedEvent;
+                    MyGSCPortPlane.PortReceiveEvent += MyGSCPort_ComDataReceivedEvent;
                 }
             }
             else if(btn.Text == "Close")
             {
-                if(MyGSCPort1.SerialPort_Close() == 1)
+                if(MyGSCPortPlane.SerialPort_Close() == 1)
                 {
                     btn.Text = "Open";
                     serial_close_enable_UI();
-                    MyGSCPort1.PortReceiveEvent -= MyGSCPort_ComDataReceivedEvent;
+                    MyGSCPortPlane.PortReceiveEvent -= MyGSCPort_ComDataReceivedEvent;
                 }
             }
         }
@@ -81,22 +82,22 @@ namespace GSCKiller
                 }
                 MyParmeter.BaudRate = Convert.ToInt32(Comb_Bps.Text);
 
-                MyGSCPort2.GSCSerialPortInit(MyParmeter);
+                MyGSCPortRotation.GSCSerialPortInit(MyParmeter);
 
-                if (MyGSCPort2.SerialPort_Open() == 1)
+                if (MyGSCPortRotation.SerialPort_Open() == 1)
                 {
                     btn.Text = "Close";
                     serial_open_disable_UI();
-                    MyGSCPort2.PortReceiveEvent += MyGSCPort_ComDataReceivedEvent;
+                    MyGSCPortRotation.PortReceiveEvent += MyGSCPort_ComDataReceivedEvent;
                 }
             }
             else if (btn.Text == "Close")
             {
-                if (MyGSCPort2.SerialPort_Close() == 1)
+                if (MyGSCPortRotation.SerialPort_Close() == 1)
                 {
                     btn.Text = "Open";
                     serial_close_enable_UI();
-                    MyGSCPort2.PortReceiveEvent -= MyGSCPort_ComDataReceivedEvent;
+                    MyGSCPortRotation.PortReceiveEvent -= MyGSCPort_ComDataReceivedEvent;
                 }
             }
         }
@@ -110,11 +111,11 @@ namespace GSCKiller
         /// </summary>
         private void serial_open_disable_UI()
         {
-            if(MyGSCPort1.IsOpen)
+            if(MyGSCPortPlane.IsOpen)
             {
                 Comb_Port1.Enabled = false;
             }
-            if (MyGSCPort2.IsOpen)
+            if (MyGSCPortRotation.IsOpen)
             {
                 Comb_Port2.Enabled = false;
             }
@@ -128,15 +129,15 @@ namespace GSCKiller
         /// </summary>
         private void serial_close_enable_UI()
         {
-            if (!MyGSCPort1.IsOpen)
+            if (!MyGSCPortPlane.IsOpen)
             {
                 Comb_Port1.Enabled = true;
             }
-            if (!MyGSCPort2.IsOpen)
+            if (!MyGSCPortRotation.IsOpen)
             {
                 Comb_Port2.Enabled = true;
             }
-            if (MyGSCPort1.IsOpen == false && MyGSCPort2.IsOpen == false)
+            if (MyGSCPortPlane.IsOpen == false && MyGSCPortRotation.IsOpen == false)
             {
                 Comb_Bps.Enabled = true;
                 btn_Refresh.Enabled = true;
@@ -158,53 +159,39 @@ namespace GSCKiller
                 myBox.Text = item;
             }
         }
-        private void Comb_Port_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MyParmeter.PortName = Comb_Port1.Text;
-
-        }
-        private void Comb_Bps_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MyParmeter.BaudRate = Convert.ToInt16(Comb_Bps.Text);
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(MyGSCPort1 != null)
+            if(MyGSCPortPlane != null)
             {
-                MyGSCPort1.SerialPort_Close();                
+                MyGSCPortPlane.SerialPort_Close();                
             }
-            if (MyGSCPort2 != null)
+            if (MyGSCPortRotation != null)
             {
-                MyGSCPort2.SerialPort_Close();
+                MyGSCPortRotation.SerialPort_Close();
             }
         }
-
         private void serial_setting_Click(object sender, EventArgs e)
         {
             PortDetailSeting detail_form = new PortDetailSeting(MyParmeter);
             detail_form.ShowDialog();
         }
-
-        /// <summary>
-        /// just for debugging
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void toolStripButton1_Click(object sender, EventArgs e)
-        //{
-        //    //string s = "Q";
-        //    //MyGSCPort1.WriteString(s);
-        //    Forms.Kenesis tem = new Forms.Kenesis(MyParmeter);
-        //    tem.MdiParent = this;
-        //    tem.Show();
-        //}
-
         private void GSCControllerMenu_Click(object sender, EventArgs e)
         {
-            Forms.GSC_Controller gsc_contorller = new Forms.GSC_Controller(MyGSCPort1);
-            gsc_contorller.MdiParent = this;
-            gsc_contorller.Show();
+            var MyContorller = new GSC_Controller();
+            MyContorller.MdiParent = this;
+            MyContorller.SendCommandEvent += GSC_contorller_SendCommand;
+            MyContorller.Show();
+        }
+        private void GSC_contorller_SendCommand(string myCmd, Controller myController)
+        {
+            if (myController == Controller.PlaneController)
+            {
+                MyGSCPortPlane.WriteString(myCmd);
+            }
+            else if (myController == Controller.RotationController)
+            {
+                MyGSCPortRotation.WriteString(myCmd);
+            }
         }
     }
 }

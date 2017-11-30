@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using Johnbee;
 
-namespace GSCkiller.Forms
+namespace GSCKiller.Forms
 {
     public partial class PortDetailSeting : Form
     {

@@ -1,6 +1,6 @@
 ﻿namespace GSCKiller
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -106,7 +106,6 @@
             // 
             this.Comb_Bps.Name = "Comb_Bps";
             this.Comb_Bps.Size = new System.Drawing.Size(160, 28);
-            this.Comb_Bps.SelectedIndexChanged += new System.EventHandler(this.Comb_Bps_SelectedIndexChanged);
             // 
             // toolStripSeparator1
             // 
@@ -123,7 +122,6 @@
             // 
             this.Comb_Port1.Name = "Comb_Port1";
             this.Comb_Port1.Size = new System.Drawing.Size(160, 28);
-            this.Comb_Port1.SelectedIndexChanged += new System.EventHandler(this.Comb_Port_SelectedIndexChanged);
             // 
             // toolStripSeparator2
             // 
@@ -244,8 +242,8 @@
             // notingToolStripMenuItem
             // 
             this.notingToolStripMenuItem.Name = "notingToolStripMenuItem";
-            this.notingToolStripMenuItem.Size = new System.Drawing.Size(130, 26);
-            this.notingToolStripMenuItem.Text = "Noting";
+            this.notingToolStripMenuItem.Size = new System.Drawing.Size(138, 26);
+            this.notingToolStripMenuItem.Text = "Nothing";
             // 
             // windowWToolStripMenuItem
             // 
@@ -262,7 +260,7 @@
             this.GSCControllerMenu.Text = "GSC_Controller";
             this.GSCControllerMenu.Click += new System.EventHandler(this.GSCControllerMenu_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -272,7 +270,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);

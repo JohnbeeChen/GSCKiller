@@ -10,14 +10,13 @@ namespace Johnbee
 {
     public class GSCSerialPort: IPortWriteReceive
     {
+        public event Action<string> PortReceiveEvent;
+
         SerialPort MySerialPort = new SerialPort();
         bool CRLS_Flag = false;//回车换行标志  
         public bool IsOpen { get { return _isopen; }}
         bool _isopen = false;
-        //public delegate void ComDataChangeDelegate(string s);
-        //public event ComDataChangeDelegate ComDataReceivedEvent;/*串口接收完成事件*/
-        public event PortReceivedString PortReceiveEvent;
-
+        
         public GSCSerialPort()
         {
             MySerialPort.DataReceived += MySerialPort_DataReceived;
@@ -126,7 +125,6 @@ namespace Johnbee
             }
             string s = cmd;
             if (CRLS_Flag) { s = cmd + "\r\n"; }
-            //cmd = "H:1-\r\n";
             MySerialPort.Write(s);
         }
         public void WriteByteArray(byte[] cmd)

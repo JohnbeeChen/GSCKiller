@@ -8,39 +8,60 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using GSCkiller.Forms;
-using Johnbee;
+using GSCKiller.Forms;
+using GSCKiller.GSC;
 
 namespace GSCKiller.Forms
 {
+    public enum Controller { PlaneController, RotationController};
     public partial class GSC_Controller : Form
     {
-        IPortWriteReceive MySerialPort;
-        
-        void MyWriteMethod(string s)
+        public event Action<string, Controller> SendCommandEvent;       
+        public GSC_Controller()
         {
-            MySerialPort.WriteString(s);
-        }
-
-        public GSC_Controller(IPortWriteReceive myPort)
-        {
-            MySerialPort = myPort;
             InitializeComponent();
-            MySerialPort.PortReceiveEvent += MyPort_ComDataReceivedEvent;
-        }
-        ~GSC_Controller()
-        {
-            MySerialPort.PortReceiveEvent -= MyPort_ComDataReceivedEvent;
-        }
-        private void MyPort_ComDataReceivedEvent(string s)
-        {
-         //   throw new NotImplementedException();
         }
 
+        private void SendCommand(string cmd, Controller myController)
+        {
+            try
+            {
+                SendCommandEvent(cmd, myController);
+            }
+            catch { }
+        }
         private void btn_Home_Click(object sender, EventArgs e)
         {
-            string cmd = "H:W--";
-            MyWriteMethod(cmd);
+            string cmd = GSC_Command.HomeCommand(Axis.Axis1,MoveDirection.Foreward);
+            SendCommand(cmd, Controller.PlaneController);
+        }
+        private void btn_HomeY_Click(object sender, EventArgs e)
+        {
+            string cmd = GSC_Command.HomeCommand(Axis.Axis2, MoveDirection.Foreward);
+            SendCommand(cmd, Controller.PlaneController);
+        }
+        private void btn_HomeR_Click(object sender, EventArgs e)
+        {
+            string cmd = GSC_Command.HomeCommand(Axis.Axis1, MoveDirection.Foreward);
+            SendCommand(cmd, Controller.RotationController);
+        }
+
+        private void btn_JogX_Click(object sender, EventArgs e)
+        {
+            string cmd = GSC_Command.JogCommand(Axis.Axis1, MoveDirection.Foreward);
+            SendCommand(cmd, Controller.PlaneController);
+        }
+
+        private void btn_JogY_Click(object sender, EventArgs e)
+        {
+            string cmd = GSC_Command.JogCommand(Axis.Axis2, MoveDirection.Foreward);
+            SendCommand(cmd, Controller.PlaneController);
+        }
+
+        private void btn_JogR_Click(object sender, EventArgs e)
+        {
+            string cmd = GSC_Command.JogCommand(Axis.Axis1, MoveDirection.Foreward);
+            SendCommand(cmd, Controller.RotationController);
         }
     }
 }
